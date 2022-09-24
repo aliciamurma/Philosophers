@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 16:19:34 by amurcia-          #+#    #+#             */
-/*   Updated: 2022/09/24 19:07:00 by amurcia-         ###   ########.fr       */
+/*   Updated: 2022/09/24 21:48:12 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,21 @@ void	ft_eat(t_philo *philo)
 	sem_wait(philo->eating);
 	sem_wait(philo->fork);
 	ft_print("has taken a fork", philo);
-	if (philo->data->num_philos == 1)
-		ft_usleep(philo->data->time_die + 1);
+	if (philo->num_philos == 1)
+		ft_usleep(philo->time_die + 1);
 	sem_wait(philo->fork);
 	ft_print("has taken a fork", philo);
-	sem_post(philo->eating);
-	philo->last_eat = ft_time() - philo->data->time_start;
+	philo->last_eat = ft_time() - philo->time_start;
 	ft_print("is eating", philo);
-	philo->need_eat++;
-	if (philo->need_eat == philo->data->num_times_eat)
+	philo->need_eat--;
+	if (philo->need_eat == 0)
 	{
 		sem_post(philo->fork);
 		sem_post(philo->fork);
 		exit (2);
 	}
-	ft_usleep(philo->data->time_eat);
+	sem_post(philo->eating);
+	ft_usleep(philo->time_eat);
 	sem_post(philo->fork);
 	sem_post(philo->fork);
 }
@@ -56,7 +56,7 @@ void	ft_eat(t_philo *philo)
 void	ft_sleep(t_philo *philo)
 {
 	ft_print("is sleeping", philo);
-	ft_usleep(philo->data->time_sleep);
+	ft_usleep(philo->time_sleep);
 }
 
 /**
@@ -85,16 +85,17 @@ void	*ft_routine(void *void_philo)
 {
 	t_philo	*philo;
 
+	printf("hola\n");
 	philo = (t_philo *)void_philo;
-	ft_usleep(philo->data->time_eat / 2);
-	philo->last_eat = (ft_time() - philo->data->time_start);
-	while (philo->need_eat != philo->data->num_times_eat)
+	ft_usleep(philo->time_eat / 2);
+	philo->last_eat = (ft_time() - philo->time_start);
+	while (philo->need_eat != 0)
 	{
 		ft_eat(philo);
 		ft_sleep(philo);
 		ft_think(philo);
 	}
-	if (philo->need_eat == philo->data->num_times_eat)
+	if (philo->need_eat == 0)
 		exit (1);
 	return (NULL);
 }
@@ -121,27 +122,29 @@ int	ft_start_routine(t_philo *philo, int id)
 		ft_usleep(5);
 	if (pthread_create(&monitor, NULL, ft_routine, philo) != 0)
 	{
+		sem_wait(philo->print);
 		printf("Error\nHilos pachuchos\n");
-		exit (0);
+		sem_close(philo->print);
+		exit (1);
 	}
-	ft_usleep(200);
-	while (philo->status == 0)
+	while (philo->need_eat != 0)
 	{
-		if (philo->data->time_die < (long long int)((ft_time()
-				- philo->data->time_start) - philo->last_eat))
+		if (philo->time_die < (ft_time() - philo->time_start - philo->last_eat))
 		{
-			printf("TIME START IS %lld AND MY LAST EAT WAS %lld\n", philo->data->time_start, philo->last_eat);
-			printf("ENTRO EN MUERTE\n");
 			philo->status = 1;
-			break ;
+			sem_wait(philo->print);
+			printf("The philo %d died\n", philo->id_philo);
+			philo->status = 1;
+			exit (1);
 		}
-		if (philo->data->num_times_eat <= philo->need_eat)
-		{
-			printf("ENTRO EN COMPLETO\n");
-			philo->status = 2;
-			break ;
-		}
+		// if (philo->need_eat == 0)
+		// {
+		// 	sem_wait(philo->print);
+		// 	printf("All the philos have eaten %lld times\n", philo->num_times_eat);
+		// 	philo->status = 2;
+		// 	break ;
+		// }
 	}
 	pthread_join(monitor, NULL);
-	exit (0);
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 17:50:15 by amurcia-          #+#    #+#             */
-/*   Updated: 2022/09/22 20:53:08 by amurcia-         ###   ########.fr       */
+/*   Updated: 2022/09/24 21:46:59 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,18 @@
  * 
  * @param data 
  */
-void	ft_kill_all(t_data *data, pid_t pid)
+int	ft_kill_all(t_data *data, pid_t pid)
 {
 	int	count;
 
 	count = 0;
 	while (count < data->num_philos)
 	{
-		if (pid != data->pid[count])
+		if (data->pid[count] != pid)
 			kill(data->pid[count], SIGKILL);
 		count++;
 	}
+	return (1);
 }
 
 /**
@@ -52,20 +53,13 @@ int	ft_end_philo(t_data *data)
 	return (0);
 }
 
-void	ft_monitorize_all(t_philo *philo, t_data *data)
-{
-	ft_delete_semaphores(philo);
-	ft_end_philo(data);
-	ft_delete(data);
-}
-
 /**
  * @brief Create the fork for each philo
  * 
  * @param data 
  * @return int 
  */
-int	ft_create_process(t_data *data, t_philo philo)
+int	ft_create_process(t_data *data, t_philo *philo)
 {
 	int			count;
 
@@ -73,19 +67,17 @@ int	ft_create_process(t_data *data, t_philo philo)
 	data->pid = malloc(sizeof(pid_t) * data->num_philos);
 	if (!data->pid)
 		return (-1);
-	data->time_start = ft_time();
 	while (count < data->num_philos)
 	{
 		data->pid[count] = 0;
-
 		data->pid[count] = fork();
 		if (data->pid[count] > 0)
 			count++;
 		else if (data->pid[count] == 0)
-			return (ft_start_routine(&philo, count));
+			return (ft_start_routine(philo, count));
 		else
 			exit (1);
 	}
-	ft_monitorize_all(&philo, data);
+	ft_delete(philo, data);
 	return (0);
 }

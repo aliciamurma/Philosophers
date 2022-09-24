@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:16:31 by amurcia-          #+#    #+#             */
-/*   Updated: 2022/09/22 21:08:50 by amurcia-         ###   ########.fr       */
+/*   Updated: 2022/09/24 21:42:48 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	ft_init_data(t_data *data, char **argv)
 	data->time_die = ft_atoi(argv[2]);
 	data->time_eat = ft_atoi(argv[3]);
 	data->time_sleep = ft_atoi(argv[4]);
+	data->num_times_eat = -1;
 	if (argv[5])
 	{
 		if (argv[5] == 0)
@@ -48,23 +49,18 @@ int	ft_init_data(t_data *data, char **argv)
  */
 int	ft_init_semaphores(t_philo *philo)
 {
-	sem_t	*print;
-	sem_t	*fork;
-	sem_t	*eating;
-	int		count;
-
-	count = 0;
-	sem_unlink("print");
-	sem_unlink("final_print");
-	sem_unlink("fork");
-	print = sem_open("print", O_CREAT | O_EXCL, 0644, 1);
-	eating = sem_open("final_print", O_CREAT | O_EXCL, 0644, 1);
-	fork = sem_open("fork", O_CREAT | O_EXCL, 0644, philo->num_philos);
-	if (print == SEM_FAILED || fork == SEM_FAILED || eating == SEM_FAILED)
+	sem_unlink("sem_print");
+	sem_unlink("sem_eating");
+	sem_unlink("sem_fork");
+	philo->print = sem_open("sem_print", O_CREAT | O_EXCL, 0644, 1);
+	philo->eating = sem_open("sem_eating", O_CREAT | O_EXCL, 0644, 1);
+	philo->fork = sem_open("sem_fork", O_CREAT | O_EXCL, 0644, philo->num_philos);
+	if (philo->print == SEM_FAILED || philo->fork == SEM_FAILED || philo->eating == SEM_FAILED)
 	{
 		printf("Error\nSemáforos pochos\n");
 	}
-	return (0);
+	philo->time_start = ft_time() + (50 * philo->num_philos);
+	return (1);
 }
 
 /**
@@ -77,13 +73,15 @@ int	ft_init_semaphores(t_philo *philo)
  */
 int	ft_init_philo(t_data *data, t_philo *philo)
 {
+	philo->num_philos = data->num_philos;
 	philo->time_die = data->time_die;
 	philo->time_eat = data->time_eat;
 	philo->time_sleep = data->time_sleep;
 	philo->num_times_eat = data->num_times_eat;
-	philo->need_eat = 0;
+	philo->need_eat = philo->num_times_eat;
 	philo->time_actual = data->time_actual;
-	philo->time_start = data->time_start;
+	philo->last_eat = philo->time_start;
+	philo->status = 0;
 	return (0);
 }
 
