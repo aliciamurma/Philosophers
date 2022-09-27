@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 10:50:08 by amurcia-          #+#    #+#             */
-/*   Updated: 2022/09/27 19:55:58 by amurcia-         ###   ########.fr       */
+/*   Updated: 2022/09/27 20:04:49 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,10 @@ int				ft_end_philo(t_data *data);
 int				ft_kill_all(t_data *data, pid_t pid);
 
 // PRINT
-void			ft_print(char *str, t_philo *philo);
+void			ft_print_fork(char *str, t_philo *philo);
+void			ft_print_eat(char *str, t_philo *philo);
+void			ft_print_think(char *str, t_philo *philo);
+void			ft_print_sleep(char *str, t_philo *philo);
 
 // ROUTINE
 int				ft_start_routine(t_philo *philo, int id);

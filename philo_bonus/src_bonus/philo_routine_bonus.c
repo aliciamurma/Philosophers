@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 16:19:34 by amurcia-          #+#    #+#             */
-/*   Updated: 2022/09/27 19:58:22 by amurcia-         ###   ########.fr       */
+/*   Updated: 2022/09/27 20:06:48 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ void	ft_eat(t_philo *philo)
 {
 	sem_wait(philo->eating);
 	sem_wait(philo->fork);
-	ft_print("has taken a fork", philo);
+	ft_print_fork("has taken a fork", philo);
 	if (philo->num_philos == 1)
 		ft_usleep(philo->time_die + 1);
 	sem_wait(philo->fork);
-	ft_print("has taken a fork", philo);
+	ft_print_fork("has taken a fork", philo);
 	philo->last_eat = ft_time() - philo->time_start;
-	ft_print("is eating", philo);
+	ft_print_eat("is eating", philo);
 	philo->num_times_eat--;
 	if (philo->num_times_eat == 0)
 	{
@@ -41,7 +41,6 @@ void	ft_eat(t_philo *philo)
 		sem_post(philo->fork);
 		sem_post(philo->eating);
 		exit (1);
-		// sem_wait(philo->print);
 	}
 	sem_post(philo->eating);
 	ft_usleep(philo->time_eat);
@@ -57,7 +56,7 @@ void	ft_eat(t_philo *philo)
  */
 void	ft_sleep(t_philo *philo)
 {
-	ft_print("is sleeping", philo);
+	ft_print_sleep("is sleeping", philo);
 	ft_usleep(philo->time_sleep);
 }
 
@@ -69,7 +68,7 @@ void	ft_sleep(t_philo *philo)
  */
 void	ft_think(t_philo *philo)
 {
-	ft_print("is thinking", philo);
+	ft_print_think("is thinking", philo);
 }
 
 /**
