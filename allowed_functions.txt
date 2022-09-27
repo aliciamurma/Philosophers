@@ -1,0 +1,140 @@
+MANDATORY
+
+memset
+    void    *memset(void *str, int c, size_t n)
+    Copia el caracter c (un char sin signo) a los primeros n caracteres de str
+
+printf
+malloc
+free
+write
+
+usleep
+    int usleep(useconds_t usec);
+    Suspende la ejecución en un intervalo de microsegundos
+
+gettimeofday
+    int gettimeofday(struct timeval *restrict tv, struct timezone *restrict tz);
+    Coge la hora del sistema expresada en microsegundos
+
+pthread_create
+    int pthread_create(pthread_t *restrict thread, const pthread_attr_t *restrict attr, void *(*start_routine)(void *), void *restrict arg);
+
+pthread_detach
+    int pthread_detach(pthread_t thread)
+    Marca la identificación del hilo ???
+
+pthread_join
+    int pthread_join(pthread_t thread, void **retval)
+    Espera por el hilo específico para terminar.
+    Si ya ha terminado, retorna inmediatamente.
+    Copia el exit status del hilo.
+
+pthread_mutex_init
+    int pthread_mutex_init(pthread_mutex_t *restrict mutex, const pthread_mutexattr_t *restrict attr)
+    Inicializa el mutex referenciado por mutex con los atributos especificados pot atributos
+
+pthread_mutex_destroy
+    int pthread_mutex_destroy(pthread_mutex_t *mutex)
+
+pthread_mutex_lock
+    int pthread_mutex_lock(pthread_mutex_t *mutex)
+    Bloqueamos el mutex
+
+pthread_mutex_unlock
+    int pthread_mutex_unlock(pthread_mutex_t *mutex)
+    Desbloqueamos el mutex
+
+
+
+                        BONUS
+
+En un proceso, los recursos no se comparten entre los procesos.
+Si un filosofo muere, es necesario notificar al resto de filosofos que esta muerte.
+Esto se pued hacer con la función KILL.
+
+memset
+    void    *memset(void *str, int c, size_t n)
+    Copia el caracter c (un char sin signo) a los primeros n caracteres de str
+
+printf
+malloc
+free
+write
+
+fork
+Llama al sistema de bifurcación para crear un nuevo proceso (proceso secundario).
+Este se ejecuta simultáneamente con el proceso principal (el que realiza la bifurcación)
+Después, ambos procesos ejecutan la siguiente instrucción.
+No toma parámetros.
+Retorna:
+    -1 si no se ha creado el proceso hijo
+    0 vuelve al proceso hijo recién creado
+    1 vuelve al padre
+El valor contiene el ID del proceso secundario recién creado
+
+kill
+
+exit
+
+pthread_create
+    int pthread_create(pthread_t *restrict thread, const pthread_attr_t *restrict attr, void *(*start_routine)(void *), void *restrict arg);
+
+pthread_detach
+    int pthread_detach(pthread_t thread)
+    Marca la identificación del hilo ???
+
+pthread_join
+    int pthread_join(pthread_t thread, void **retval)
+    Espera por el hilo específico para terminar.
+    Si ya ha terminado, retorna inmediatamente.
+    Copia el exit status del hilo.
+
+usleep
+    int usleep(useconds_t usec);
+    Suspende la ejecución en un intervalo de microsegundos
+
+gettimeofday
+    int gettimeofday(struct timeval *restrict tv, struct timezone *restrict tz);
+    Coge la hora del sistema expresada en microsegundos
+
+waitpid
+    pid_t waitpid(pid_t pid, int *status, int options);
+    Suspende  la  ejecución del proceso actual haste que un proceso hijo ha
+    terminado, o hasta que se produce una señal que termina el proceso
+    Si un hijo ha salido cuando se produce la llamada, la función vuelve inmediatamente
+    Todos los recursos del sistema reservados por el hijo son liberados.
+
+Un semáforo es una variable que puede aumentar o disminuir. Si hay varios subprocesos que intentan cambiar el valor de un semáforo, el sistema garantiza que todas las operaciones se realizan secuencialmente
+
+sem_open
+    sem_t *sem_open(const char *name, int oflag);
+    sem_t *sem_open(const char *name, int oflag,mode_t mode, unsigned int value);
+    Crea un nuevo semáforo POSIX o abre uno que ya existe.
+    El semáforo se identifica por el nombre.
+
+sem_close
+    int sem_close(sem_t *sem);
+    Cierra el semáforo referido por el name
+
+sem_post
+    int sem_post(sem_t *sem);
+    Es como un unlock
+    Incrementa el semáforo al que apunta sem
+    Si el valor se vuelve mayor que 0, otro proceso o subproceso bloqueado en una llamada sem_wait será desperado
+    y bloqueará el semáforo
+
+sem_wait
+    int sem_wait(sem_t *sem);
+    Es como un lock
+    Bloquea el semáforo apuntado por sem
+    Si el valor de retorno es mayor que 0, disminuye
+    Si el valor de retorno es 0, la llamada se bloquea hasta que
+    pueda realizarse la disminución  se interrumpa la llamada
+
+sem_unlink
+    int sem_unlink(const char *name);
+    Elimina el semáforo referido por el name
+    Retorna 0. Si ha ocurrido un error, retorna -1
+
+Cada hijo tiene su thread que mira si esta muerto

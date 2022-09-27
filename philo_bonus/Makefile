@@ -10,9 +10,7 @@ INC_DIR = inc_bonus
 
 SRC = philo_main_bonus.c philo_check_bonus.c \
 		philo_utils_bonus.c philo_init_bonus.c \
-		philo_create_bonus.c philo_delete_bonus.c \
-		philo_routine_bonus.c philo_print_bonus.c \
-		philo_finish_bonus.c
+		philo_create_bonus.c philo_routine_bonus.c philo_print_bonus.c 
 
 INC = -I $(INC_DIR)
 	  

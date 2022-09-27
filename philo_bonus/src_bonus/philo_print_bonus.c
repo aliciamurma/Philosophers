@@ -6,12 +6,18 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 18:30:11 by amurcia-          #+#    #+#             */
-/*   Updated: 2022/09/22 20:54:19 by amurcia-         ###   ########.fr       */
+/*   Updated: 2022/09/27 17:09:02 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc_bonus/philo_bonus.h"
 
+/**
+ * @brief Action of print
+ * 
+ * @param str 
+ * @param philo 
+ */
 void	ft_print(char *str, t_philo *philo)
 {
 	long long int	time;

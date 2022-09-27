@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 16:19:34 by amurcia-          #+#    #+#             */
-/*   Updated: 2022/09/23 13:59:23 by amurcia-         ###   ########.fr       */
+/*   Updated: 2022/09/27 18:57:18 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	ft_eat(t_philo *philo)
 	pthread_mutex_lock(&philo->data->m_forks[philo->right_fork]);
 	ft_print_fork(philo);
 	philo->last_eat = ft_time() - philo->data->time_start;
-	printf("MY LAST EAT WAS AT %lld\n", philo->last_eat);
 	ft_print_eat(philo);
 	philo->need_eat++;
 	ft_usleep(philo->data->time_eat);

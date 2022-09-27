@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 17:50:15 by amurcia-          #+#    #+#             */
-/*   Updated: 2022/09/24 21:46:59 by amurcia-         ###   ########.fr       */
+/*   Updated: 2022/09/27 19:58:36 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,24 @@
 #include <sys/wait.h>
 
 /**
- * @brief Kill for each philo with their pid
- * Si alguno muere, mata a los demas con kill
+ * @brief Delete the semaphores
+ * 
+ * @param philo 
+ */
+void	ft_delete_semaphores(t_philo *philo)
+{
+	sem_close(philo->fork);
+	sem_close(philo->print);
+	sem_close(philo->eating);
+}
+
+/**
+ * @brief Make a kill for each pid (= each philo)
+ * If any of the kids die, everybody dies
  * 
  * @param data 
+ * @param pid 
+ * @return int 
  */
 int	ft_kill_all(t_data *data, pid_t pid)
 {
@@ -36,32 +50,44 @@ int	ft_kill_all(t_data *data, pid_t pid)
 
 /**
  * @brief Check if the process has ended
- * Ponemos -1 y no el PID porque así mira cualquier pid y no uno en concreto
- * Se ahorra tiempo
+ * the waitpid function uses the -1 number to check any PID and not only 1
+ * (= less time)
+ * WEXISTATUS == 0 for death processes
+ * WEXISTATUS == 1 for routine completed
  * 
  * @param data 
- * @return int 
  */
-int	ft_end_philo(t_data *data)
+void	ft_check_deaths(t_data *data)
 {
+	int		count;
 	pid_t	pid;
 	int		status;
 
-	pid = waitpid(-1, &status, WUNTRACED);
-	if (WEXITSTATUS(status) == 0)
-		ft_kill_all(data, pid);
-	return (0);
+	count = 0;
+	while (count < data->num_philos)
+	{
+		pid = waitpid(-1, &status, WUNTRACED);
+		if (WEXITSTATUS(status) == 0)
+			break ;
+		if (WEXITSTATUS(status) == 1)
+			count++;
+	}
+	ft_kill_all(data, pid);
 }
 
 /**
- * @brief Create the fork for each philo
+ * @brief Ceate a fork for each philo
+ * The time used to create pthreads <<<< forks, because is
+ * a new program and its need to do a copy of everything
  * 
  * @param data 
+ * @param philo 
  * @return int 
  */
 int	ft_create_process(t_data *data, t_philo *philo)
 {
-	int			count;
+	int	count;
+
 
 	count = 0;
 	data->pid = malloc(sizeof(pid_t) * data->num_philos);
@@ -69,15 +95,17 @@ int	ft_create_process(t_data *data, t_philo *philo)
 		return (-1);
 	while (count < data->num_philos)
 	{
-		data->pid[count] = 0;
 		data->pid[count] = fork();
 		if (data->pid[count] > 0)
 			count++;
 		else if (data->pid[count] == 0)
-			return (ft_start_routine(philo, count));
+		{
+			ft_start_routine(philo, count);
+			break ;
+		}
 		else
 			exit (1);
 	}
-	ft_delete(philo, data);
+	ft_check_deaths(data);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:16:31 by amurcia-          #+#    #+#             */
-/*   Updated: 2022/09/24 21:42:48 by amurcia-         ###   ########.fr       */
+/*   Updated: 2022/09/27 18:37:23 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ int	ft_init_data(t_data *data, char **argv)
 }
 
 /**
- * @brief Init the semaphor for: fork, print and the last print
- * It is need to create one fork semaphore for each num of philos
- * Primero eliminamos el semáforo en caso de que estuviese creado de antes
- * 
+ * @brief Create a semaphor for the fork, print the actions and the action of eat
+ * The last one is necessary bc with more than 80-100 philos, is not
+ * enought telling to the /2 ft_usleep();
+ * First, it is need to unlink the semaphor (imagine that the last time weren't deleted)
  * 
  * @param name 
  * @param value 
@@ -59,14 +59,11 @@ int	ft_init_semaphores(t_philo *philo)
 	{
 		printf("Error\nSemáforos pochos\n");
 	}
-	philo->time_start = ft_time() + (50 * philo->num_philos);
 	return (1);
 }
 
 /**
  * @brief Init all the philosophers with their data
- * Create a semaphor for the fork, print the actions,
- * the death and number of times that each philo must eat
  * 
  * @param data 
  * @return int 
@@ -78,10 +75,11 @@ int	ft_init_philo(t_data *data, t_philo *philo)
 	philo->time_eat = data->time_eat;
 	philo->time_sleep = data->time_sleep;
 	philo->num_times_eat = data->num_times_eat;
-	philo->need_eat = philo->num_times_eat;
-	philo->time_actual = data->time_actual;
+	philo->id_philo = 0;
+	philo->time_start = ft_time() + (50 * philo->num_philos);
+	data->time_start = philo->time_start;
 	philo->last_eat = philo->time_start;
-	philo->status = 0;
+	data->print = philo->print;
 	return (0);
 }
 
@@ -97,12 +95,8 @@ int	ft_init(t_data *data, t_philo *philo, char **argv)
 	if (ft_init_data(data, argv) == -1)
 		return (-1);
 	if (ft_init_philo(data, philo) == -1)
-	{
 		return (-1);
-	}
 	if (ft_init_semaphores(philo) == -1)
-	{
 		return (-1);
-	}
 	return (0);
 }
