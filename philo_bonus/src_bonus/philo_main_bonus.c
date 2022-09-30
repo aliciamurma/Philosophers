@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:05:24 by amurcia-          #+#    #+#             */
-/*   Updated: 2022/09/27 19:56:53 by amurcia-         ###   ########.fr       */
+/*   Updated: 2022/09/30 17:19:20 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,5 @@ int	main(int argc, char **argv)
 		return (-1);
 	ft_create_process(&data, &philo);
 	ft_delete_semaphores(&philo);
-	// free(&data.pid);
 	return (0);
 }

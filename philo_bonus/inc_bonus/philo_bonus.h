@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 10:50:08 by amurcia-          #+#    #+#             */
-/*   Updated: 2022/09/27 20:04:49 by amurcia-         ###   ########.fr       */
+/*   Updated: 2022/09/30 18:11:57 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ typedef struct s_data
 	long long int	time_sleep;
 	long long int	num_times_eat;
 	long long int	time_start;
-	sem_t			*print;
 	pid_t			*pid;
 }	t_data;
 
@@ -68,6 +67,7 @@ int				ft_atoi(const char *str);
 long long int	ft_time(void);
 void			ft_usleep(int nbr);
 void			ft_handle_signal(int signal);
+long long int	ft_time_death(t_philo *philo);
 
 // CREATE
 int				ft_create_process(t_data *data, t_philo *philo);

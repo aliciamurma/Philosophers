@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 17:48:00 by amurcia-          #+#    #+#             */
-/*   Updated: 2022/09/24 21:23:33 by amurcia-         ###   ########.fr       */
+/*   Updated: 2022/09/30 16:04:59 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,6 @@ int	ft_create_pthread(t_data *data)
 		pthread_join(pthread[count], NULL);
 		count++;
 	}
-	// free (pthread);
+	free (pthread);
 	return (0);
 }

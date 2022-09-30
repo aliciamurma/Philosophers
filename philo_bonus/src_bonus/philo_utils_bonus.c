@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 17:45:42 by amurcia-          #+#    #+#             */
-/*   Updated: 2022/09/26 14:17:08 by amurcia-         ###   ########.fr       */
+/*   Updated: 2022/09/30 15:52:42 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,18 @@ void	ft_usleep(int nbr)
 	{
 		usleep(nbr / 2);
 	}
+}
+
+/**
+ * @brief Search time time of death (norminette problems)
+ * 
+ * @param philo 
+ * @return long long int 
+ */
+long long int	ft_time_death(t_philo *philo)
+{
+	long long int	time;
+
+	time = ft_time() - philo->time_start - philo->last_eat;
+	return (time);
 }

@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 17:30:14 by amurcia-          #+#    #+#             */
-/*   Updated: 2022/09/23 14:00:18 by amurcia-         ###   ########.fr       */
+/*   Updated: 2022/09/30 16:10:32 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,9 @@ int	ft_die(t_data *data)
 	{
 		if (data->time_die < (long long int)((ft_time() - data->time_start)
 			- data->philo[count].last_eat))
-		if (data->time_die < (long long int)((ft_time() - data->time_start)
-			- data->philo[count].last_eat))
 		{
 			pthread_mutex_lock(&data->m_death);
-			printf("EL TIEMPO DE ULTIMA COMIDA FUE  %lld\n", data->philo[count].last_eat);
 			ft_print_die(&data->philo[count]);
-			// pthread_mutex_lock(&data->m_print);
 			pthread_mutex_lock(data->m_forks);
 			data->death = 1;
 			return (0);

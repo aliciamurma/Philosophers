@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 16:19:34 by amurcia-          #+#    #+#             */
-/*   Updated: 2022/09/27 20:06:48 by amurcia-         ###   ########.fr       */
+/*   Updated: 2022/09/30 16:39:25 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,12 +100,13 @@ void	*ft_routine(void *void_philo)
 
 /**
  * @brief It's the main of the soon
- * It is need to create a pthread for each philo, which will make all the routine
+ * It is need to create a pthread for each philo, which will
+ * make all the routine
  * In a infinite while we check if a philo dies (status = 1)
  * or if completes the routine (status = 2)
  * In both cases, the routine has to end
- * The usleep function is necessary to make that all the philos start at the same time
- * 
+ * The usleep function is necessary to make that all the philos 
+ * start at the same time
  * 
  * @param arg 
  * @return void* 
@@ -126,10 +127,11 @@ int	ft_start_routine(t_philo *philo, int id)
 	}
 	while (philo->num_times_eat != 0)
 	{
-		if (philo->time_die <= (ft_time() - philo->time_start - philo->last_eat))
+		if (philo->time_die <= ft_time_death(philo))
 		{
 			sem_wait(philo->print);
-			printf("%lld	the philo	%d	died\n", ft_time() - philo->time_start, philo->id_philo);
+			printf("%lld\tthe philo	%d\tdied\n",
+				ft_time() - philo->time_start, philo->id_philo);
 			exit (0);
 		}
 	}

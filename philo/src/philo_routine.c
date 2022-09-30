@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 16:19:34 by amurcia-          #+#    #+#             */
-/*   Updated: 2022/09/27 18:57:18 by amurcia-         ###   ########.fr       */
+/*   Updated: 2022/09/30 16:03:15 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
  * (1) Miramos que no haya muertos
  * (2) Bloqueamos el tenedor derecho
  * (3) Bloqueamos el tenedor izquierdo
- * (4) Cogemos el tiempo de la ultima comida (nos aseguramos de que no esta muerto por inanición)
+ * (4) Cogemos el tiempo de la ultima comida
+ * (nos aseguramos de que no esta muerto por inanición)
  * (5) Come
  * (2) Desbloqueamos el tenedor derecho
  * (3) Desbloqueamos el tenedor izquierdo

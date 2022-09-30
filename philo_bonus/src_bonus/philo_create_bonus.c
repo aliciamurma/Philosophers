@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 17:50:15 by amurcia-          #+#    #+#             */
-/*   Updated: 2022/09/27 19:58:36 by amurcia-         ###   ########.fr       */
+/*   Updated: 2022/09/30 17:19:15 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	ft_kill_all(t_data *data, pid_t pid)
  * 
  * @param data 
  */
-void	ft_check_deaths(t_data *data)
+int	ft_check_deaths(t_data *data)
 {
 	int		count;
 	pid_t	pid;
@@ -73,6 +73,9 @@ void	ft_check_deaths(t_data *data)
 			count++;
 	}
 	ft_kill_all(data, pid);
+	if (count == data->num_philos)
+		return (1);
+	return (0);
 }
 
 /**
@@ -87,7 +90,6 @@ void	ft_check_deaths(t_data *data)
 int	ft_create_process(t_data *data, t_philo *philo)
 {
 	int	count;
-
 
 	count = 0;
 	data->pid = malloc(sizeof(pid_t) * data->num_philos);
@@ -106,6 +108,7 @@ int	ft_create_process(t_data *data, t_philo *philo)
 		else
 			exit (1);
 	}
-	ft_check_deaths(data);
+	if (ft_check_deaths(data) == 1)
+		printf("All philos have completed the routine\n");
 	return (0);
 }
