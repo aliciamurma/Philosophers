@@ -6,11 +6,22 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:16:31 by amurcia-          #+#    #+#             */
-/*   Updated: 2022/09/20 17:00:33 by amurcia-         ###   ########.fr       */
+/*   Updated: 2022/10/01 19:07:08 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
+
+int	ft_check_if_one(t_data *data)
+{
+	if (data->num_philos == 1)
+	{
+		printf("0 the philo 1 has taken a fork\n");
+		printf("0 the philo 1 died\n");
+		return (-1);
+	}
+	return (0);
+}
 
 /**
  * @brief Assign the given data
@@ -26,13 +37,21 @@ int	ft_init_data(t_data *data, char **argv)
 	data->time_sleep = ft_atoi(argv[4]);
 	if (argv[5])
 	{
-		if (argv[5] == 0)
+		data->num_times_eat = ft_atoi(argv[5]);
+		if (ft_atoi(argv[5]) == 0)
 		{
 			printf("Error\nRutina realizada antes de comenzar\n");
 			return (-1);
 		}
-		data->num_times_eat = ft_atoi(argv[5]);
 	}
+	if (data->num_philos == 0 || data->time_die == 0
+		|| data->time_eat == 0 || data->time_sleep == 0)
+	{
+		printf("Error\n");
+		return (-1);
+	}
+	if (ft_check_if_one(data) == -1)
+		return (-1);
 	return (0);
 }
 
@@ -98,7 +117,8 @@ int	ft_init_philos(t_data *data)
  */
 int	ft_init(t_data *data, char **argv)
 {
-	ft_init_data(data, argv);
+	if (ft_init_data(data, argv) == -1)
+		return (-1);
 	if (ft_init_mutex(data) == -1)
 	{
 		return (-1);

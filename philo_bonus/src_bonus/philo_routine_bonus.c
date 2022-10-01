@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 16:19:34 by amurcia-          #+#    #+#             */
-/*   Updated: 2022/09/30 16:39:25 by amurcia-         ###   ########.fr       */
+/*   Updated: 2022/10/01 18:58:51 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,9 @@ void	*ft_routine(void *void_philo)
 	t_philo	*philo;
 
 	philo = (t_philo *)void_philo;
-	ft_usleep((philo->time_eat / 3) * (philo->num_philos % 2));
-	philo->last_eat = (ft_time() - philo->time_start);
+	while (philo->time_start > ft_time())
+		ft_usleep(5);
+	philo->last_eat = philo->time_start;
 	while (philo->num_times_eat != 0)
 	{
 		ft_eat(philo);
@@ -116,8 +117,6 @@ int	ft_start_routine(t_philo *philo, int id)
 	pthread_t	monitor;
 
 	philo->id_philo = id + 1;
-	while (philo->time_start > ft_time())
-		ft_usleep(5);
 	if (pthread_create(&monitor, NULL, ft_routine, philo) != 0)
 	{
 		sem_wait(philo->print);

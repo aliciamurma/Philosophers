@@ -6,11 +6,28 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:16:31 by amurcia-          #+#    #+#             */
-/*   Updated: 2022/09/30 18:12:11 by amurcia-         ###   ########.fr       */
+/*   Updated: 2022/10/01 19:05:23 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc_bonus/philo_bonus.h"
+
+/**
+ * @brief Check if they only gives you 1 philo
+ * 
+ * @param data 
+ * @return int 
+ */
+int	ft_check_if_one(t_data *data)
+{
+	if (data->num_philos == 1)
+	{
+		printf("0 the philo 1 has taken a fork\n");
+		printf("0 the philo 1 died\n");
+		return (-1);
+	}
+	return (0);
+}
 
 /**
  * @brief Assign the given data
@@ -27,18 +44,27 @@ int	ft_init_data(t_data *data, char **argv)
 	data->num_times_eat = -1;
 	if (argv[5])
 	{
-		if (argv[5] == 0)
+		if (argv[5][0] == '0' && argv[5][1] == '\0')
 		{
 			printf("Error\nRutina realizada antes de comenzar\n");
 			return (-1);
 		}
 		data->num_times_eat = ft_atoi(argv[5]);
 	}
+	if (data->num_philos == 0 || data->time_die == 0
+		|| data->time_eat == 0 || data->time_sleep == 0)
+	{
+		printf("Error\n");
+		return (-1);
+	}
+	if (ft_check_if_one(data) == -1)
+		return (-1);
 	return (0);
 }
 
 /**
  * @brief Create a semaphor for the fork, print the actions 
+ * 
  * and the action of eat
  * The last one is necessary bc with more than 80-100 philos, 
  * is not enought telling to the /2 ft_usleep();

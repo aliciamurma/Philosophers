@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 17:48:00 by amurcia-          #+#    #+#             */
-/*   Updated: 2022/09/30 16:04:59 by amurcia-         ###   ########.fr       */
+/*   Updated: 2022/10/01 17:59:36 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	ft_no_deaths(t_data *data)
 	{
 		if (ft_routine_completed(data) == 0)
 		{
+			printf("All the philos have eaten enough\n");
 			break ;
 		}
 		if (ft_die(data) == 0)
