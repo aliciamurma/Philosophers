@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 16:19:34 by amurcia-          #+#    #+#             */
-/*   Updated: 2022/10/01 18:58:51 by amurcia-         ###   ########.fr       */
+/*   Updated: 2022/10/03 18:00:23 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,23 @@ void	ft_think(t_philo *philo)
 }
 
 /**
+ * @brief Case of only 1 philo
+ * 
+ * @param philo 
+ */
+bool	ft_one_philo(t_philo *philo)
+{
+	if (philo->num_philos == 1)
+	{
+		ft_print_fork("has taken a fork", philo);
+		ft_usleep(philo->time_die);
+		philo->time_die = ft_time_death(philo);
+		return (true);
+	}
+	return (false);
+}
+
+/**
  * @brief The routine that all the philos have to do
  * (1) Eat
  * (2) Sleep
@@ -88,6 +105,8 @@ void	*ft_routine(void *void_philo)
 	while (philo->time_start > ft_time())
 		ft_usleep(5);
 	philo->last_eat = philo->time_start;
+	if (ft_one_philo(philo) == true)
+		exit (0);
 	while (philo->num_times_eat != 0)
 	{
 		ft_eat(philo);

@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 16:19:34 by amurcia-          #+#    #+#             */
-/*   Updated: 2022/09/30 16:03:15 by amurcia-         ###   ########.fr       */
+/*   Updated: 2022/10/03 17:33:35 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ int	ft_eat(t_philo *philo)
 		return (-1);
 	pthread_mutex_lock(&philo->data->m_forks[philo->left_fork]);
 	ft_print_fork(philo);
-	if (philo->data->num_philos == 1)
-		ft_usleep(philo->data->time_die + 1);
 	pthread_mutex_lock(&philo->data->m_forks[philo->right_fork]);
 	ft_print_fork(philo);
 	philo->last_eat = ft_time() - philo->data->time_start;
@@ -74,6 +72,16 @@ int	ft_think(t_philo *philo)
 	return (0);
 }
 
+void	ft_one_philo(t_philo *philo)
+{
+	if (philo->data->num_philos == 1)
+	{
+		pthread_mutex_lock(&philo->data->m_forks[philo->left_fork]);
+		ft_print_fork(philo);
+		ft_usleep(philo->data->time_die + 1);
+	}
+}
+
 /**
  * @brief The routine that all the philos have to do
  * (1) Eat
@@ -91,6 +99,7 @@ void	*ft_start_routine(void *arg)
 	int		count;
 
 	philo = (t_philo *)arg;
+	ft_one_philo(philo);
 	if (philo->name % 2 != 0)
 		ft_usleep(philo->data->time_eat);
 	philo->last_eat = (ft_time() - philo->data->time_start);
