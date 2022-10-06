@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 17:30:14 by amurcia-          #+#    #+#             */
-/*   Updated: 2022/10/01 17:58:57 by amurcia-         ###   ########.fr       */
+/*   Updated: 2022/10/06 18:04:45 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	ft_routine_completed(t_data *data)
 	{
 		data->death = 1;
 		pthread_mutex_lock(&data->m_print);
-		pthread_mutex_lock(data->m_forks);
+		// pthread_mutex_lock(data->m_forks);
 		return (0);
 	}
 	return (1);
@@ -64,6 +64,7 @@ int	ft_die(t_data *data)
 		{
 			pthread_mutex_lock(&data->m_death);
 			ft_print_die(&data->philo[count]);
+			pthread_mutex_lock(&data->m_print);
 			pthread_mutex_lock(data->m_forks);
 			data->death = 1;
 			return (0);

@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 17:48:00 by amurcia-          #+#    #+#             */
-/*   Updated: 2022/10/01 17:59:36 by amurcia-         ###   ########.fr       */
+/*   Updated: 2022/10/06 17:53:43 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	ft_no_deaths(t_data *data)
 		if (ft_routine_completed(data) == 0)
 		{
 			printf("All the philos have eaten enough\n");
+			pthread_mutex_unlock(&data->m_print);
 			break ;
 		}
 		if (ft_die(data) == 0)
@@ -62,6 +63,8 @@ int	ft_create_pthread(t_data *data)
 		count++;
 	}
 	ft_no_deaths(data);
+	pthread_mutex_unlock(&data->m_print);
+	pthread_mutex_unlock(&data->m_death);
 	count = 0;
 	while (pthread[count])
 	{

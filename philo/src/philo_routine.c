@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 16:19:34 by amurcia-          #+#    #+#             */
-/*   Updated: 2022/10/03 17:33:35 by amurcia-         ###   ########.fr       */
+/*   Updated: 2022/10/06 17:44:06 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	*ft_start_routine(void *arg)
 
 	philo = (t_philo *)arg;
 	ft_one_philo(philo);
-	if (philo->name % 2 != 0)
+	if (philo->name % 2 == 0)
 		ft_usleep(philo->data->time_eat);
 	philo->last_eat = (ft_time() - philo->data->time_start);
 	count = 0;

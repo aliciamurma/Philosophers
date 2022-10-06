@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:16:31 by amurcia-          #+#    #+#             */
-/*   Updated: 2022/10/03 17:31:06 by amurcia-         ###   ########.fr       */
+/*   Updated: 2022/10/06 17:44:22 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ int	ft_init_mutex(t_data *data)
 			return (-1);
 		count++;
 	}
+	if (pthread_mutex_init(&data->m_forks[count], NULL) != 0)
+		return (-1);
 	return (0);
 }
 
@@ -86,12 +88,12 @@ int	ft_init_philos(t_data *data)
 	while (count < data->num_philos)
 	{
 		data->philo[count].name = count + 1;
-		data->philo[count].left_fork = count + 1;
-		data->philo[count].right_fork = count;
+		data->philo[count].left_fork = count;
+		data->philo[count].right_fork = count - 1;
 		data->philo[count].data = data;
 		count++;
 	}
-	data->philo[0].right_fork = count;
+	data->philo[0].right_fork = count - 1;
 	return (0);
 }
 
@@ -107,12 +109,8 @@ int	ft_init(t_data *data, char **argv)
 	if (ft_init_data(data, argv) == -1)
 		return (-1);
 	if (ft_init_mutex(data) == -1)
-	{
 		return (-1);
-	}
 	if (ft_init_philos(data) == -1)
-	{
 		return (-1);
-	}
 	return (0);
 }

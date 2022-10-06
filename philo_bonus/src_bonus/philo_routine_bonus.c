@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 16:19:34 by amurcia-          #+#    #+#             */
-/*   Updated: 2022/10/03 18:00:23 by amurcia-         ###   ########.fr       */
+/*   Updated: 2022/10/03 18:26:40 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,20 +54,10 @@ void	ft_eat(t_philo *philo)
  * @param philo 
  * @return int 
  */
-void	ft_sleep(t_philo *philo)
+void	ft_sleep_think(t_philo *philo)
 {
 	ft_print_sleep("is sleeping", philo);
 	ft_usleep(philo->time_sleep);
-}
-
-/**
- * @brief The philos think
- * 
- * @param philo 
- * @return int 
- */
-void	ft_think(t_philo *philo)
-{
 	ft_print_think("is thinking", philo);
 }
 
@@ -110,8 +100,7 @@ void	*ft_routine(void *void_philo)
 	while (philo->num_times_eat != 0)
 	{
 		ft_eat(philo);
-		ft_sleep(philo);
-		ft_think(philo);
+		ft_sleep_think(philo);
 	}
 	if (philo->num_times_eat == 0)
 		exit (1);
