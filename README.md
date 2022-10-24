@@ -1,6 +1,7 @@
 <a href="https://github.com/JaeSeoKim/badge42"><img src="https://badge42.vercel.app/api/v2/cl56x7ufz003509jr5i8cj5cl/project/2781000" alt="amurcia-'s 42 Philosophers Score" /></a>
 
 MANDATORY
+
 Uno o más filósofos se sientan en una mesa redonda, en cuyo centro se encuentra un gran bol de espaguetis.
 Los filósofos solo pueden comer, pensar o dormir.
 También hay tenedores en la mesa, tantos tenedores como filósofos.
@@ -22,5 +23,6 @@ No puedes tener más de 10ms entre la muerte de un filósofo y el momento en el 
 Intenta no matar a tus pobres filósofos.
 
 BONUS
+
 Los tenedores están en el centro de la mesa. Su disponibilidad depende de un semáforo.
 Cada filósofo debe ser un proceso, y el proceso principal no debe ser un filósofo.
