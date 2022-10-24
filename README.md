@@ -3,10 +3,15 @@
 MANDATORY
 
 Uno o más filósofos se sientan en una mesa redonda, en cuyo centro se encuentra un gran bol de espaguetis.
+
 Los filósofos solo pueden comer, pensar o dormir.
+
 También hay tenedores en la mesa, tantos tenedores como filósofos.
+
 Para poder comer,  los filósofos deben tomar el tenedor de la derecha y el de la izquierda, uno en cada mano.
+
 Cuándo un filósofo termine de comer, dejará los tenedores en la mesa e inmediatamente empezará a dormir. Una vez se despierte, empezará a pensar.
+
 La simulación se detiene cuando un filósofo muere o cuando todos los filósofos han comido determinado número de veces.
 
 Argumentos que acepta el programa:
@@ -23,8 +28,11 @@ Argumentos que acepta el programa:
 con la muerte de un filósofo.
 
 Cada filósofo debe ser un hilo.
+
 Utiliza mutex para tenedores y para usar printf.
+
 No puedes tener más de 10ms entre la muerte de un filósofo y el momento en el que imprimes su muerte.
+
 Intenta no matar a tus pobres filósofos.
 
 ![image](https://user-images.githubusercontent.com/102992210/197512944-13dc10d4-d55f-46cc-85e7-8b3382fcde9a.png)
@@ -33,4 +41,5 @@ Intenta no matar a tus pobres filósofos.
 BONUS
 
 Los tenedores están en el centro de la mesa. Su disponibilidad depende de un semáforo.
+
 Cada filósofo debe ser un proceso, y el proceso principal no debe ser un filósofo.
