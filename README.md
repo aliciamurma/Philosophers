@@ -14,6 +14,7 @@ Cuándo un filósofo termine de comer, dejará los tenedores en la mesa e inmedi
 
 La simulación se detiene cuando un filósofo muere o cuando todos los filósofos han comido determinado número de veces.
 
+
 Argumentos que acepta el programa:
 
 1: es el número de filósofos (y tenedores).
