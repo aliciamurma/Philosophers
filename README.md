@@ -10,10 +10,15 @@ Cuándo un filósofo termine de comer, dejará los tenedores en la mesa e inmedi
 La simulación se detiene cuando un filósofo muere o cuando todos los filósofos han comido determinado número de veces.
 
 Argumentos que acepta el programa:
+
 1: es el número de filósofos (y tenedores).
+
 2 (milisegundos): si un filósofo no empieza a comer en este tiempo desde el comienzo de su última comida o desde el principio de la simulación, este morirá.
+
 3: es el tiempo que gasta un filósofo para comer. Durante ese tiempo, tendrá los tenedores ocupados.
+
 4: es el tiempo que gasta un filósofo en dormir.
+
 5 (argumento opcional): si todos los filósofos comen al menos este número de veces, la simulación se detendrá. Si no se especifica, la simulación se detendrá
 con la muerte de un filósofo.
 
@@ -21,6 +26,9 @@ Cada filósofo debe ser un hilo.
 Utiliza mutex para tenedores y para usar printf.
 No puedes tener más de 10ms entre la muerte de un filósofo y el momento en el que imprimes su muerte.
 Intenta no matar a tus pobres filósofos.
+
+![image](https://user-images.githubusercontent.com/102992210/197512944-13dc10d4-d55f-46cc-85e7-8b3382fcde9a.png)
+
 
 BONUS
 
