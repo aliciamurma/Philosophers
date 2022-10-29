@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 16:19:34 by amurcia-          #+#    #+#             */
-/*   Updated: 2022/10/06 17:44:06 by amurcia-         ###   ########.fr       */
+/*   Updated: 2022/10/14 15:16:08 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,16 @@ int	ft_think(t_philo *philo)
 	return (0);
 }
 
-void	ft_one_philo(t_philo *philo)
+bool	ft_one_philo(t_philo *philo)
 {
 	if (philo->data->num_philos == 1)
 	{
 		pthread_mutex_lock(&philo->data->m_forks[philo->left_fork]);
 		ft_print_fork(philo);
 		ft_usleep(philo->data->time_die + 1);
+		return (true);
 	}
+	return (false);
 }
 
 /**
@@ -99,13 +101,14 @@ void	*ft_start_routine(void *arg)
 	int		count;
 
 	philo = (t_philo *)arg;
-	ft_one_philo(philo);
 	if (philo->name % 2 == 0)
 		ft_usleep(philo->data->time_eat);
 	philo->last_eat = (ft_time() - philo->data->time_start);
 	count = 0;
 	while (philo->data->death == 0)
 	{
+		if (ft_one_philo(philo))
+			break ;
 		if (ft_eat(philo) == -1 || ft_sleep(philo) == -1
 			|| ft_think(philo) == -1)
 			break ;
