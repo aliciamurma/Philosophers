@@ -38,9 +38,28 @@ Intenta no matar a tus pobres filósofos.
 
 ![image](https://user-images.githubusercontent.com/102992210/197512944-13dc10d4-d55f-46cc-85e7-8b3382fcde9a.png)
 
+# Instruccions
+Compile code
+```shell
+make
+```
+Ejecute the program
+```shell
+./philo 100 600 200 200 
+```
 
 # BONUS
 
 Los tenedores están en el centro de la mesa. Su disponibilidad depende de un semáforo.
 
 Cada filósofo debe ser un proceso, y el proceso principal no debe ser un filósofo.
+
+# Instruccions
+Compile code
+```shell
+make bonus
+```
+Ejecute the program
+```shell
+./philo_bonus 100 600 200 200 
+```
