@@ -1,6 +1,6 @@
 <a href="https://github.com/JaeSeoKim/badge42"><img src="https://badge42.vercel.app/api/v2/cl56x7ufz003509jr5i8cj5cl/project/2781000" alt="amurcia-'s 42 Philosophers Score" /></a>
 
-MANDATORY
+# MANDATORY
 
 Uno o más filósofos se sientan en una mesa redonda, en cuyo centro se encuentra un gran bol de espaguetis.
 
@@ -39,7 +39,7 @@ Intenta no matar a tus pobres filósofos.
 ![image](https://user-images.githubusercontent.com/102992210/197512944-13dc10d4-d55f-46cc-85e7-8b3382fcde9a.png)
 
 
-BONUS
+# BONUS
 
 Los tenedores están en el centro de la mesa. Su disponibilidad depende de un semáforo.
 
