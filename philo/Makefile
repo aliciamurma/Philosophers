@@ -44,4 +44,16 @@ fclean : clean
 
 re : fclean all
 
+
+run: $(NAME)
+#	@ ./$(NAME) 1 800 200 200
+	@ ./$(NAME) 5 800 200 200
+#	@ ./$(NAME) 5 800 200 200 5
+#	@ ./$(NAME) 4 410 200 200
+#	@ ./$(NAME) 5 420 200 100
+#	@ ./$(NAME) 100 470 200 200
+
+norm:
+	@norminette philosophers | sh ../norminette.sh
+
 PHONY: clean re fclean all
