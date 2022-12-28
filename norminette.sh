@@ -12,3 +12,5 @@ if [[ ${success} == true ]]; then
 else
 	echo "\x1b[31mNORMINETTE KO!"
 fi
+
+# from https://github.com/arsalas
