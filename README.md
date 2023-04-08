@@ -27,30 +27,32 @@ I try not to kill your poor philosophers.<br>
 
 ![image](https://user-images.githubusercontent.com/102992210/197512944-13dc10d4-d55f-46cc-85e7-8b3382fcde9a.png)
 
-# Instructions
-Compile code
+<h3>Instructions</h3>
+Compile code in philo folder
 ```shell
 make
 ```
-Ejecute the program
+Execute the program in philo folder
 ```shell
 make run
 ```
 
 <h2>Bonus</h2>
 
-Los tenedores están en el centro de la mesa. Su disponibilidad depende de un semáforo.
+All the forks are put in the middle of the table.<br>
+They have no states in memory but the number of available forks is represented by
+a semaphore.<br>
+Each philosopher should be a process. But the main process should not be a
+philosopher.<br>
 
-Cada filósofo debe ser un proceso, y el proceso principal no debe ser un filósofo.
-
-# Instructions
-Compile code
+<h3>Instructions</h3>
+Compile code in philo_bonus folder
 ```shell
 make bonus
 ```
-Ejecute the program
+Execute the program in philo_bonus folder
 ```shell
-make runbonus
+make run
 ```
 </body>
 </html>
