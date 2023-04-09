@@ -29,12 +29,7 @@
 <img src="https://user-images.githubusercontent.com/102992210/197512944-13dc10d4-d55f-46cc-85e7-8b3382fcde9a.png" alt="example image"/>
  
  <h3>Instructions</h3>
-Compile code in philo folder
-  
-```
-make
-```
-Execute the program in philo folder
+Compile and execute the progra in philo folder
   
 ```
 make run
@@ -45,13 +40,8 @@ All the forks are put in the middle of the table.<br>
 They have no states in memory but the number of available forks is represented by a semaphore.<br>
 Each philosopher should be a process. But the main process should not be a philosopher.<br>
 <h3>Instructions</h3>
-Compile code in philo_bonus folder
+Compile and execute the program in philo_bonus folder
   
-```
-make bonus
-```
- 
-Execute the program in philo_bonus folder
 ```
 make run
 ```
