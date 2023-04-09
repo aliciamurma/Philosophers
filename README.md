@@ -23,7 +23,7 @@
     Each philosopher must be a thread. <br>
     Use mutex for forks and to use printf.<br><br>
     You can't have more than 10ms between the death of a philosopher and the moment you print their death.<br><br>
-    I try not to kill your poor philosophers.<br>
+    Try not to kill your poor philosophers.<br>
   </body>
     
 <img src="https://user-images.githubusercontent.com/102992210/197512944-13dc10d4-d55f-46cc-85e7-8b3382fcde9a.png" alt="example image"/>
